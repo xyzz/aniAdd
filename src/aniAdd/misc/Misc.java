@@ -5,6 +5,10 @@
 package aniAdd.misc;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -99,5 +103,18 @@ public class Misc {
             }
         }
         return ~mid;
+    }
+
+    public static boolean renameAndSymlink(File source, File destination) {
+        try {
+            if (!source.renameTo(destination))
+                throw new IOException();
+            Path target = Paths.get(source.getParentFile().getAbsolutePath()).relativize(Paths.get(destination.getAbsolutePath()));
+            Files.createSymbolicLink(Paths.get(source.getAbsolutePath()), target);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

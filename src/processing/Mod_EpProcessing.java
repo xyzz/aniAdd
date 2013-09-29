@@ -20,6 +20,11 @@ import java.io.FilenameFilter;
 import java.util.TreeMap;
 import udpApi.Mod_UdpApi;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import static aniAdd.misc.Misc.renameAndSymlink;
+
 public class Mod_EpProcessing implements IModule {
 
     public static String[] supportedFiles = {"avi", "ac3", "mpg", "mpeg", "rm", "rmvb", "asf", "wmv", "mov", "ogm", "mp4", "mkv", "rar", "zip", "ace", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "swf", "flv"};
@@ -511,7 +516,7 @@ public class Mod_EpProcessing implements IModule {
                     procFile.FileObj(tmpFile);
                 }
 
-                if (procFile.FileObj().renameTo(renFile)) {
+                if (renameAndSymlink(procFile.FileObj(), renFile)) {
                     Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.FileRenamed, procFile.Id(), renFile, truncated);
                     if ((Boolean) mem.get("GUI_RenameRelatedFiles")) {
                         // <editor-fold defaultstate="collapsed" desc="Rename Related Files">
@@ -530,7 +535,7 @@ public class Mod_EpProcessing implements IModule {
                             String newFn = filename.substring(0, filename.lastIndexOf("."));
                             for (File srcFile : srcFiles) {
                                 relExt = srcFile.getName().substring(oldFilenameWoExt.length());
-                                if (srcFile.renameTo(new File(folderObj, newFn + relExt))) {
+                                if (renameAndSymlink(srcFile, new File(folderObj, newFn + relExt))) {
                                     accumExt += relExt + " ";
                                 } else {
                                     //Todo
@@ -706,6 +711,8 @@ public class Mod_EpProcessing implements IModule {
             if (files.contains("Path", cf.getAbsolutePath())) {
                 continue;
             }
+            if (Files.isSymbolicLink(Paths.get(cf.getAbsolutePath())))
+                continue;
 
             FileInfo fileInfo = new FileInfo(cf, lastFileId);
             fileInfo.MLStorage(FileInfo.eMLStorageState.values()[storage]);

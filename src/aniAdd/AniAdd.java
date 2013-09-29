@@ -1,16 +1,14 @@
 package aniAdd;
 
 import aniAdd.Modules.IModule;
-import aniAdd.Communication.ComEvent;
-import aniAdd.Communication.ComListener;
-import aniAdd.misc.Misc;
 import aniAdd.misc.Mod_Memory;
 import gui.GUI;
+import processing.Mod_EpProcessing;
+import udpApi.Mod_UdpApi;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeMap;
-import processing.Mod_EpProcessing;
-import udpApi.Mod_UdpApi;
 
 /**
  *

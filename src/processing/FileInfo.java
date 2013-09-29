@@ -43,11 +43,7 @@ public class FileInfo {
     public Boolean Watched(){ return watched; }
 
     public void FileObj(File fileObj) { this.fileObj = fileObj; }
-    public void ActionsTodo(EnumSet<eAction> actionsTodo) { this.actionsTodo = actionsTodo; }
-    public void ActionsDone(EnumSet<eAction> actionsDone) { this.actionsDone = actionsDone; }
-    public void ActionsError(EnumSet<eAction> actionsError) { this.actionsError = actionsError; }
     public void MLStorage(eMLStorageState mlStorage) { this.mlStorage = mlStorage; }
-    public void Data(TreeMap<String, String> data) { this.data = data; }
     public void Served(boolean served) { this.served = served; }
     public void IsFinal(boolean isFinal) { this.isFinal = isFinal; }
     public void Watched(Boolean watched){ this.watched = watched; }

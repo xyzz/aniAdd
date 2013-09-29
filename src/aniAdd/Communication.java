@@ -1,17 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package aniAdd;
 
 import aniAdd.Modules.IModule;
 import aniAdd.misc.Misc;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.EventListener;
-import java.util.EventObject;
+
+import java.util.*;
 
 /**
  *
@@ -28,8 +20,6 @@ public interface Communication {
 	//public void AddComListener(ComListener comListener){ listeners.add(comListener); }
 	//public void RemoveComListener(ComListener comListener){ listeners.remove(comListener); }
 	void addComListener(ComListener comListener);
-
-	void RemoveComListener(ComListener comListener);
 
 	public static interface ComListener extends EventListener {
 		void EventHandler(ComEvent comEvent);
@@ -48,9 +38,7 @@ public interface Communication {
 			this(source, type);
 
 			this.params = new ArrayList<Object>();
-			for(Object param : params) {
-				this.params.add(param);
-			}
+            Collections.addAll(this.params, params);
 		}
 
 		public ComEvent(Object source, eType type) {

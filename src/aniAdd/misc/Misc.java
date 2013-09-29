@@ -13,25 +13,6 @@ import java.util.Date;
 
 public class Misc {
 
-    public static final boolean isNumber(final String s) {
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (Exception exception) {
-            return false;
-        }
-    }
-
-    public static boolean containsNumber(int[] Numbers, int Number) {
-        for (int Num : Numbers) {
-            if (Num == Number) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     // Get All Files from Folder & SubFolders
     public static ArrayList<File> getFiles(File dir, String[] filter) {
         ArrayList<File> Files = new ArrayList<File>();
@@ -56,14 +37,6 @@ public class Misc {
         return false;
     }
 
-    public static long sumBits(BitSet BA) {
-        long Sum = 0;
-        for (int I = BA.nextSetBit(0); I >= 0; I = BA.nextSetBit(I + 1)) {
-            Sum = Sum + (long) Math.pow((double) 2, (double) I);
-        }
-        return Sum;
-    }
-
     public static String toMask(BitSet ba, int length) {
         String hex = "";
         int hexPart;
@@ -76,22 +49,8 @@ public class Misc {
         return hex;
     }
 
-    public static BitSet getBits(int b) {
-        BitSet Bits = new BitSet(8);
-
-        int I = 7;
-        while (b > 0) {
-            if (b != (b = (byte) (b % Math.pow(2, I)))) {
-                Bits.set(I);
-            }
-            I--;
-        }
-
-        return Bits;
-    }
-
     public static String stringPadding(String str, int size, char padChar) {
-        StringBuffer padded = new StringBuffer(str);
+        StringBuilder padded = new StringBuilder(str);
         while (padded.length() < size) {
             padded.insert(0, padChar);
         }
@@ -121,7 +80,6 @@ public class Misc {
     public static String DateToString(Date date, String format){
         DateFormat dateFormat = new SimpleDateFormat(format);
         return dateFormat.format(date);
-
     }
 
     public static int binarySearch(ArrayList<Integer> a, int x) {
@@ -140,7 +98,6 @@ public class Misc {
                 return mid;
             }
         }
-        return mid ^ -1;
+        return ~mid;
     }
 }
-

@@ -1,9 +1,5 @@
 package aniAdd.startup;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 import aniAdd.Modules.IModule;
 import aniAdd.*;
 import aniAdd.Communication.ComEvent;
@@ -68,11 +64,9 @@ public class Main {
         api.setAniDBSession(session);
         api.setUsername(username);
 
-        if (api.authenticate()) {
-        } else {
-        }
+        api.authenticate();
 
-        frm.setDefaultLookAndFeelDecorated(true);
+        JFrame.setDefaultLookAndFeelDecorated(true);
 
         frm.add(gui);
         frm.pack();
